@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arun Money Maker</title>
+<style>
+body{margin:0;font-family:Arial;background:#f2f2f2}
+header{background:#111;color:#fff;padding:20px;text-align:center}
+nav button{margin:5px;padding:8px 15px;border:none;background:#ff9800;color:#fff;border-radius:5px;cursor:pointer}
+.container{max-width:1000px;margin:auto;padding:20px}
+.card{background:#fff;padding:20px;margin-bottom:20px;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,0.1)}
+input,textarea{width:100%;padding:8px;margin:6px 0;border-radius:5px;border:1px solid #ccc}
+button.submit{background:#4caf50;color:#fff;padding:8px;border:none;border-radius:5px;cursor:pointer}
+footer{text-align:center;background:#111;color:#fff;padding:15px}
+</style>
+<script>
+function showPage(id){
+document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+document.getElementById(id).style.display='block';
+if(id==='blog'){loadPosts();}
+}function login(){ let pass=document.getElementById('adminPass').value; if(pass==='1234'){ document.getElementById('adminLogin').style.display='none'; document.getElementById('adminPanel').style.display='block'; }else{alert('Wrong Password');} }
+
+function addPost(){ let title=document.getElementById('postTitle').value; let content=document.getElementById('postContent').value; if(title && content){ let posts=JSON.parse(localStorage.getItem('posts')||'[]'); posts.push({title,content}); localStorage.setItem('posts',JSON.stringify(posts)); document.getElementById('postTitle').value=''; document.getElementById('postContent').value=''; alert('Post Added'); } }
+
+function loadPosts(){ let blogDiv=document.getElementById('blogPosts'); blogDiv.innerHTML=''; let posts=JSON.parse(localStorage.getItem('posts')||'[]'); posts.forEach(p=>{ blogDiv.innerHTML+=<div class='card'><h3>${p.title}</h3><p>${p.content}</p></div>; }); } </script>
+
+</head>
+<body><header>
+<h1>Arun Money Maker</h1>
+<p>Online Earning & Smart Income Ideas</p>
+<nav>
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('blog')">Blog</button>
+<button onclick="showPage('admin')">Admin</button>
+</nav>
+</header><div class="container"><div id="home" class="page card">
+<h2>Welcome 🚀</h2>
+<p>Yaha tum blogging aur affiliate marketing se paisa kama sakte ho.</p>
+</div><div id="blog" class="page" style="display:none">
+<h2>Blog Posts</h2>
+<div id="blogPosts"></div>
+</div><div id="admin" class="page" style="display:none">
+<h2>Admin Panel 🔐</h2>
+<div id="adminLogin" class="card">
+<input type="password" id="adminPass" placeholder="Enter Admin Password">
+<button class="submit" onclick="login()">Login</button>
+<p>Password: 1234 (Change in code later)</p>
+</div><div id="adminPanel" style="display:none" class="card">
+<h3>Add New Post</h3>
+<input type="text" id="postTitle" placeholder="Post Title">
+<textarea id="postContent" rows="4" placeholder="Post Content"></textarea>
+<button class="submit" onclick="addPost()">Add Post</button>
+</div>
+</div></div><footer>
+© 2026 Arun Money Maker | All Rights Reserved
+</footer></body>
+</html>
